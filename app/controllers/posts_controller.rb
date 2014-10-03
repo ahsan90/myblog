@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     #if params[:search]
-    @posts = Post.page(params[:page]).per_page(10).search(params[:search]).order("created_at DESC")
+    @posts = Post.page(params[:page]).per_page(6).search(params[:search]).order("created_at DESC")
     #else
     #@posts = Post.page(params[:page]).per_page(6).order("created_at DESC")
     #end
@@ -32,7 +32,10 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.html {
+          flash[:success] =  'Post was successfully created.'
+          redirect_to @post
+        }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new }
@@ -46,7 +49,10 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+        format.html {
+          flash[:success] = 'Post was successfully updated.'
+          redirect_to @post
+        }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit }
@@ -60,7 +66,10 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+      format.html {
+        flash[:danger] =  'Post was successfully deleted.'
+        redirect_to posts_url
+      }
       format.json { head :no_content }
     end
   end

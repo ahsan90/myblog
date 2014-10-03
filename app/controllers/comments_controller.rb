@@ -1,22 +1,37 @@
 class CommentsController < ApplicationController
+  before_action :load_post
   def create
-    @post = Post.find(params[:post_id])
     @comment = @post.comments.build(comment_params)
     if @comment.save
-      redirect_to @post
+      respond_to do |format|
+      format.html {
+        flash[:success] = "Thanks for your comment."
+        redirect_to @post}
+      format.js
+      end
     else
-      flash[:notice] = "Unable to post the comment"
-      redirect_to @post
+      respond_to do |format|
+      format.html {flash[:danger] = "Unable to post the comment"}
+      format.js { render 'fail_create.js.erb'}
+      end
     end
   end
 
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
-    redirect_to @comment.post
+    respond_to do |format|
+      format.html {
+      redirect_to @post
+    }
+      format.js
+    end
   end
 
   private
+  def load_post
+    @post = Post.find(params[:post_id])
+  end
   def comment_params
     params.require(:comment).permit(:text)
   end

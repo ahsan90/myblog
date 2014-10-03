@@ -7,8 +7,11 @@ gem 'rails', '4.1.6'
 gem 'sqlite3'
 
 gem 'sass-rails', '~> 4.0.3'
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '~> 3.2.0.2'
 gem 'uglifier', '>= 1.3.0'
+gem 'bootstrap-form'
+gem 'simple_bootstrap_form'
+gem 'simple_form', '~> 3.0.2'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 #gem 'will_paginate-bootstrap'

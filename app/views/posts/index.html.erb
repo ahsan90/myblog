@@ -1,5 +1,5 @@
 <h2>Listing posts</h2>
-<p><%= link_to 'New Post', new_post_path %></p>
+<p><%= link_to 'New Post', new_post_path, class: "btn btn-default"%></p>
 <%= form_tag posts_path, :method => 'get' do %>
  <p>
    <%= text_field_tag :search, params[:search],class: "span2", placeholder: "Search Posts" %>

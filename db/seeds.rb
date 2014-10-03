@@ -9,7 +9,7 @@
 require 'faker'
 include Faker
 
-100.times do
+50.times do
   post = Post.create(
       :title => "#{Lorem.sentence}",
       :text => Lorem.paragraphs.join("<br/>")
